@@ -16,6 +16,7 @@
         android:textSize="20sp"
         android:text="@string/repository_name"
         android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
         style="@style/TextAppearance.AppCompat.Headline"/>
 
     <TextView
@@ -28,6 +29,7 @@
         android:paddingRight="3dp"
         android:text="@string/repository_language"
         android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
         style="@style/TextAppearance.AppCompat.Caption"/>
 
 </LinearLayout>

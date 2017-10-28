@@ -27,6 +27,7 @@
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         style="@style/button"
+        android:fontFamily="sans-serif-light"
         android:text="@string/search_action"/>
 
 </LinearLayout>
