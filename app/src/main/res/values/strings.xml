@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GitHub Viewer</string>
+    <string name="search_action">Search</string>
+    <string name="github_profile">GitHub Profile</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="profile_name">Profile name</string>
+    <string name="repository_name">Repository name</string>
+    <string name="repository_language">Repository language</string>
+    <string name="unknow_action_warn">Warning! No action for: </string>
+    <string name="unknow_event_warn">Warning! Unknown event! </string>
+    <string name="api_error">Ocorreu um erro de rede. Verifique sua conexão com a Internet e tente novamente mais tarde.</string>
+    <string name="api_user_not_found">Usuário não encontrado. Favor inserir outro nome.</string>
+</resources>
