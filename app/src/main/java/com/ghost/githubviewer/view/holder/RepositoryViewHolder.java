@@ -7,24 +7,25 @@ import android.widget.TextView;
 import com.ghost.githubviewer.R;
 import com.ghost.githubviewer.model.Repository;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RepositoryViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView name;
-    private TextView language;
+    @BindView(R.id.repository_name)
+    protected TextView name;
+
+    @BindView(R.id.repository_language)
+    protected TextView language;
 
     public RepositoryViewHolder(View itemView) {
         super(itemView);
-
-        name = itemView.findViewById(R.id.repository_name);
-        language = itemView.findViewById(R.id.repository_language);
-
+        ButterKnife.bind(this, itemView);
     }
 
     public void bind(Repository repository) {
-
         name.setText(repository.getName());
         language.setText(repository.getLanguage());
-
     }
 
 }

@@ -18,13 +18,22 @@ import com.ghost.githubviewer.service.GitHubService;
 
 import org.greenrobot.eventbus.Subscribe;
 
-public class SearchActivity extends BaseActivity implements View.OnClickListener, TextView.OnEditorActionListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class SearchActivity extends BaseActivity implements TextView.OnEditorActionListener {
 
     private static final String TAG = "SearchAct";
 
-    private ProgressBar progress;
-    private EditText profileInput;
-    private Button searchButton;
+    @BindView(R.id.progress)
+    protected ProgressBar progress;
+
+    @BindView(R.id.profile_input)
+    protected EditText profileInput;
+
+    @BindView(R.id.search_button)
+    protected Button searchButton;
 
     private GitHubService gitHubService;
 
@@ -36,35 +45,16 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
         setContentView(R.layout.activity_search);
 
-        progress = (ProgressBar) findViewById(R.id.progress);
+        ButterKnife.bind(this);
 
-        profileInput = (EditText) findViewById(R.id.profile_input);
         profileInput.setOnEditorActionListener(this);
-
-        searchButton = (Button) findViewById(R.id.search_button);
-        searchButton.setOnClickListener(this);
 
         gitHubService = new GitHubService();
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()){
-
-            case R.id.search_button:
-                searchProfile();
-                break;
-
-            default:
-                Log.w(TAG, getString(R.string.unknow_action_warn) + view.getId());
-            
-        }
-
-    }
-
-    private void searchProfile(){
+    @OnClick(R.id.search_button)
+    protected void searchProfile(){
 
         String username = profileInput.getText().toString().trim();
 

@@ -3,7 +3,6 @@ package com.ghost.githubviewer.view.activity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,15 +14,28 @@ import com.ghost.githubviewer.view.custom.EnhancedRecyclerView;
 import com.ghost.githubviewer.view.transformation.BorderedCircleTransform;
 import com.squareup.picasso.Picasso;
 
-public class ProfileActivity extends BaseActivity implements View.OnClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class ProfileActivity extends BaseActivity{
 
     private static final String TAG = "PrflAct";
 
     public final static String OWNER_REPO_EXTRA = "OWNER_REPO_EXTRA";
 
-    private ImageView profilePicture;
-    private TextView profileName;
-    private EnhancedRecyclerView recyclerView;
+    @BindView(R.id.profile_picture)
+    protected ImageView profilePicture;
+
+    @BindView(R.id.profile_name)
+    protected TextView profileName;
+
+    @BindView(R.id.repository_list)
+    protected EnhancedRecyclerView recyclerView;
+
+    @BindView(R.id.empty_view)
+    protected View emptyView;
+
     private RepositoriesAdapter repositoriesAdapter;
 
     @Override
@@ -32,20 +44,14 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
         setContentView(R.layout.activity_profile);
 
-        View homeButton = findViewById(R.id.home_button);
-        homeButton.setOnClickListener(this);
+        ButterKnife.bind(this);
 
-        profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        profileName = (TextView) findViewById(R.id.profile_name);
-
-        recyclerView = (EnhancedRecyclerView) findViewById(R.id.repository_list);
-
-        View emptyView = findViewById(R.id.empty_view);
         recyclerView.setmEmptyView(emptyView);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 recyclerView.getContext(),
                 LinearLayoutManager.VERTICAL);
+
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         repositoriesAdapter = new RepositoriesAdapter();
@@ -78,17 +84,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.home_button:
-                super.onBackPressed();
-                break;
-
-            default:
-                Log.w(TAG, getString(R.string.unknow_event_warn));
-        }
-
+    @OnClick(R.id.home_button)
+    protected void onClick(View view) {
+        super.onBackPressed();
     }
+
 }
