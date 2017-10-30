@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ghost.githubviewer.R;
@@ -21,6 +22,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     private static final String TAG = "SearchAct";
 
+    private ProgressBar progress;
     private EditText profileInput;
     private Button searchButton;
 
@@ -33,6 +35,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_search);
+
+        progress = (ProgressBar) findViewById(R.id.progress);
 
         profileInput = (EditText) findViewById(R.id.profile_input);
         profileInput.setOnEditorActionListener(this);
@@ -65,6 +69,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         String username = profileInput.getText().toString().trim();
 
         if (!username.isEmpty()) {
+            showProgress();
             gitHubService.requestProfile(username);
             searchButton.setEnabled(false);
         }
@@ -75,6 +80,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public void onEvent(GitHubServiceEvent event){
 
         searchButton.setEnabled(true);
+        hideProgress();
 
         switch (event.getType()) {
 
@@ -115,4 +121,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         return false;
 
     }
+
+    private void showProgress(){
+        progress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress(){
+        progress.setVisibility(View.GONE);
+    }
+
 }
